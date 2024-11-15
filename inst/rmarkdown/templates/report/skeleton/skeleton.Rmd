@@ -1,0 +1,46 @@
+---
+studytitle      : "Study title"
+reporttitle     : "Report title"
+department      : "Your Department"
+unit            : "Your reasearch Unit"
+authorone       : "First author"
+roleone         : "First author role"
+emailone        : "name.surname@email.com"
+authortwo       : "Second author"
+roletwo         : "Second author role"
+emailtwo        : "name.surname@email.com"
+authorthree     : "Third author"
+rolethree       : "Third author role"
+emailthree      : "name.surname@email.com"
+authorfour      : "Fourth author"
+rolefour        : "Fourth author role"
+emailfour       : "name.surname@email.com"
+
+
+documentclass   : article   # article (default) report
+fontsize        : 12pt      # 10pt 11pt 12pt (default)
+numbersections  : true
+
+output          : TemplateLandS::TemplateLandS
+---
+
+
+```{r, include = FALSE}
+library(knitr)
+library(kableExtra)
+library(TemplateLandS)
+cd_knit_chunk_opts()
+```
+
+```{r}
+cd_page_title()
+```
+
+# Customized R Markdown Template
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
