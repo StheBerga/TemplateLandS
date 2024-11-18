@@ -16,24 +16,59 @@ authorfour:       "Fourth author"
 rolefour:         "Fourth author role"
 emailfour:        "name.surname@email.com"
 
-
 documentclass:    article   # article (default) report
 fontsize:         12pt      # 10pt 11pt 12pt (default)
 numbersections:   true
+tableofcontents:  true
+tocname:          "Table of Contents"
+tocdepth:         2
 
 output: TemplateLandS::TemplateLandS
 ---
 
-
-```{r, include = FALSE}
+```{r setup, include = FALSE}
+options(scipen = 999999)
 library(knitr)
 library(kableExtra)
 library(TemplateLandS)
 cd_knit_chunk_opts()
 ```
 
-```{r}
+```{r title page}
 cd_page_title()
+```
+
+```{r load packages}
+pacman::p_load(Hmisc, rms, ggplot2, dplyr, survminer, scales, tidyr, openxlsx, 
+               factoextra, readxl, writexl, shiny, kableExtra, gtsummary, tidyverse, 
+               caret, flextable, ComplexHeatmap, umap, officer, readxl, gridExtra, zoo, 
+               circlize, PMCMRplus, progress, colorspace, ggpp, ggpattern, ggpubr, survival,
+               ggh4x, ggformula, grid, svMisc, rvg, lubridate, OlinkAnalyze, LandS, update = F)
+
+# Load RData 
+# load("path_to_your_RData")
+
+project = "Project_path_here"
+# pc = "Luca"
+# pc = "Stefano"
+
+if (pc == "Luca"){
+  path_functions = "//fileserversvc/biomimmunol/Rfunction/Complete function"
+  main_path = paste0("//fileserversvc/biomimmunol/Projects/", project)
+} else if (pc == "Stefano"){
+  path_functions = "/Volumes/biomimmunol/Rfunction/Complete function"
+  main_path = paste0("/Volumes/biomimmunol/Projects/", project)
+}
+
+path_analisi = paste0(main_path, "/Analisi")
+path_output = paste0(main_path, "/Output")
+path_dati = paste0(main_path, "/Dati")
+
+
+for (i in list.files(path_functions)){
+  source(paste0(path_functions, "/", i))
+}
+rm(pc, i, project)
 ```
 
 # Customized R Markdown Template

@@ -28,7 +28,10 @@ cd_page_title <- function(studytitle = default(rmarkdown::metadata$studytitle, "
                           emailthree = default(rmarkdown::metadata$emailthree, "name.surname@email.com"), 
                           authorfour = default(rmarkdown::metadata$authorfour, "Fourth author"),
                           rolefour = default(rmarkdown::metadata$rolefour, "Fourth author role"), 
-                          emailfour = default(rmarkdown::metadata$emailfour, "name.surname@email.com")) {
+                          emailfour = default(rmarkdown::metadata$emailfour, "name.surname@email.com"), 
+                          tableofcontents = default(rmarkdown::metadata$tableofcontents, "true"),
+                          tocname = default(rmarkdown::metadata$tocname, "Table of Contents"), 
+                          tocdepth = default(rmarkdown::metadata$tocdepth, "2")) {
 
   logo_path <- indiedown_path_tex("res/logoINT.jpg")
 
@@ -60,10 +63,18 @@ cd_page_title <- function(studytitle = default(rmarkdown::metadata$studytitle, "
   \\vskip 0.4in
   \\textbf{<<unit>>} \\par
   \\vskip 0.8in
-  \\normalsize{ <<date>> }
-\\end{center}
+  <<date>> \\par
+  \\end{center}
 
 \\clearpage
+
+\\newboolean{tocvar}
+\\setboolean{tocvar}{<<tableofcontents>>}
+\\setcounter{tocdepth}{<<tocdepth>>}
+\\renewcommand{\\contentsname}{<<tocname>>}
+\\ifthenelse{\\boolean{tocvar}}{
+    \\tableofcontents
+}{}
 ")
   
 }

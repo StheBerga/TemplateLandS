@@ -1,13 +1,13 @@
 Package: TemplateLandS
-Title: Acme Inc. Corporate Design R Markdown Template
-Version: 0.1
+Title: LaTeX template for report
+Version: 1.0
 Authors@R:
-    person(given = "First",
-           family = "Last",
+    person(given = "Stefano",
+           family = "Bergamini",
            role = c("aut", "cre"),
-           email = "first.last@example.com")
+           email = "stefano.bergamini@istitutotumori.mi.it")
 Description: Provides an R Markdown template conforming to the
-    corporate design guidelines at Acme Inc.
+    Fondazione IRCCS Istituto Nazionale dei Tumori guidance
 License: file LICENSE
 Depends:
     R (>= 4.0.0)

@@ -11,7 +11,7 @@
 TemplateLandS <- function(...) {
   indiedown_pdf_document_with_asset(
     highlight = "pygments",
-    latex_engine = "lualatex",
+    latex_engine = "xelatex",
     ...
   )
 }
