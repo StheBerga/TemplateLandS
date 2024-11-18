@@ -1,27 +1,27 @@
 ---
-studytitle      : "Study title"
-reporttitle     : "Report title"
-department      : "Your Department"
-unit            : "Your reasearch Unit"
-authorone       : "First author"
-roleone         : "First author role"
-emailone        : "name.surname@email.com"
-authortwo       : "Second author"
-roletwo         : "Second author role"
-emailtwo        : "name.surname@email.com"
-authorthree     : "Third author"
-rolethree       : "Third author role"
-emailthree      : "name.surname@email.com"
-authorfour      : "Fourth author"
-rolefour        : "Fourth author role"
-emailfour       : "name.surname@email.com"
+studytitle:       "Study title"
+reporttitle:      "Report title"
+department:       "Your Department"
+unit:             "Your reasearch Unit"
+authorone:        "First author"
+roleone:          "First author role"
+emailone:         "name.surname@email.com"
+authortwo:        "Second author"
+roletwo:          "Second author role"
+emailtwo:         "name.surname@email.com"
+authorthree:      "Third author"
+rolethree:        "Third author role"
+emailthree:       "name.surname@email.com"
+authorfour:       "Fourth author"
+rolefour:         "Fourth author role"
+emailfour:        "name.surname@email.com"
 
 
-documentclass   : article   # article (default) report
-fontsize        : 12pt      # 10pt 11pt 12pt (default)
-numbersections  : true
+documentclass:    article   # article (default) report
+fontsize:         12pt      # 10pt 11pt 12pt (default)
+numbersections:   true
 
-output          : TemplateLandS::TemplateLandS
+output: TemplateLandS::TemplateLandS
 ---
 
 
