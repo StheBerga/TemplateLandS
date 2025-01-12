@@ -1,0 +1,247 @@
+---
+studytitle:       "Study title"
+reporttitle:      "Report title"
+department:       "Your Department"
+unit:             "Your reasearch Unit"
+authorone:        "First author"
+roleone:          "First author role"
+emailone:         "name.surname@email.com"
+authortwo:        "Second author"
+roletwo:          "Second author role"
+emailtwo:         "name.surname@email.com"
+authorthree:      "Third author"
+rolethree:        "Third author role"
+emailthree:       "name.surname@email.com"
+authorfour:       "Fourth author"
+rolefour:         "Fourth author role"
+emailfour:        "name.surname@email.com"
+
+documentclass:    article   # article (default) report
+fontsize:         12pt      # 10pt 11pt 12pt (default)
+numbersections:   true
+tableofcontents:  true
+tocname:          "Table of Contents"
+tocdepth:         2
+linestretchtable: 0.8
+linestretch:      1.5
+
+output: TemplateLandS::TemplateLandS
+knit: TemplateLandS::knit_LB
+---
+
+```{r setup, include = FALSE}
+options(scipen = 999999)
+library(knitr)
+library(kableExtra)
+library(TemplateLandS)
+cd_knit_chunk_opts()
+```
+
+```{r title page}
+cd_page_title()
+```
+
+```{r load packages}
+pacman::p_load(Hmisc, rms, ggplot2, dplyr, survminer, scales, tidyr, openxlsx, 
+               factoextra, readxl, writexl, shiny, kableExtra, gtsummary, tidyverse, 
+               caret, flextable, ComplexHeatmap, umap, officer, readxl, gridExtra, zoo, 
+               circlize, PMCMRplus, progress, colorspace, ggpp, ggpattern, ggpubr, survival,
+               ggh4x, ggformula, grid, svMisc, rvg, lubridate, OlinkAnalyze, LandS, update = F)
+
+# Load RData 
+# load("path_to_your_RData")
+
+project = "Path to your project"
+
+if (Sys.info()["machine"] == "x86-64"){
+  path_functions = "//fileserversvc/biomimmunol/Rfunction/Complete function"
+  main_path = paste0("//fileserversvc/biomimmunol/Projects/", project)
+} else if (Sys.info()["machine"] == "arm64"){
+  path_functions = "/Volumes/biomimmunol/Rfunction/Complete function"
+  main_path = paste0("/Volumes/biomimmunol/Projects/", project)
+}
+
+path_analisi = paste0(main_path, "/Analisi")
+path_dati = paste0(main_path, "/Dati")
+path_output = paste0(main_path, "/Output")
+
+
+for (i in list.files(path_functions)){
+  source(paste0(path_functions, "/", i))
+}
+rm(i, project)
+```
+
+# Overall statistics
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+```{r Descriptive, echo=FALSE}
+tbl_summary(data = data_surv, include = all_of(sort(vett_clinics)), 
+            label = clinics_label, 
+            type = all_dichotomous() ~ "categorical", missing_text = "Missing", 
+            statistic = all_continuous() ~ "{mean} ({sd})") %>% 
+  modify_header(label = "**Variable**") %>% 
+  bold_labels() %>% 
+  italicize_levels() %>% 
+  gtsummary::as_kable_extra(longtable = T, booktabs = T, caption = "Descriptive statistics clinical variables", linesep = "")
+```
+
+# Survival Analysis
+
+Follow-up time was computed from the date of therapy initiation. The Kaplan-Meier estimate for median follow-up and its 95% confidence interval (95%) CI is presented in the following table. 
+
+```{r Follow-up, results='asis', echo=FALSE, warning=FALSE}
+survfit(Surv(OS, OS_EVENT == 0) ~ 1, data_surv) %>% 
+  tbl_survfit(probs = 0.5,
+              statistic = "{estimate} ({conf.low} - {conf.high})",
+              label_header = "**Median (95% CI)**", 
+              estimate_fun = function(x) style_number(x, digits = 2), 
+              label = "Follow-up") %>%
+  add_n() %>% 
+  bold_labels() %>% 
+  modify_header(list(label = "")) %>% 
+  gtsummary::as_kable_extra(booktabs = T, caption = "Follow-up", linesep = "", longtable = T)
+```
+
+The first and third quartiles are equal to `r round(quantile(survfit(Surv(OS, OS_EVENT == 0) ~ 1, data_surv), probs = 0.25)$quantile, 1)` months and `r round(quantile(survfit(Surv(OS, OS_EVENT == 0) ~ 1, data_surv), probs = 0.75)$quantile, 1)` months, respectively. 
+
+Overall Survival (OS) and Progression-Free Survival (PFS) were calculated from the date of therapy initiation. OS was defined as the time from the initiation of therapy until the date of death, whereas PFS was defined as the time from the initiation of therapy until disease progression. For patients who were censored, OS and PFS were calculated up to the last recorded visit.
+
+To visualize the survival distributions for OS and PFS, Kaplan-Meier survival curves were generated. These curves provide a non-parametric estimate of the survival function and allow us to assess the proportion of patients surviving over time. The median estimates of OS and PFS across the cohort are presented and Kaplan-Meier survival curves are illustrated.
+
+```{r OS, results='asis', echo=FALSE, warning=FALSE}
+list(survfit(Surv(OS, OS_EVENT) ~ 1, data_surv),
+     survfit(Surv(PFS, PFS_EVENT) ~ 1, data_surv))%>% 
+  tbl_survfit(probs = 0.5,
+              statistic = "{estimate} ({conf.low} - {conf.high})",
+              label_header = "**Median (95% CI)**", 
+              estimate_fun = function(x) style_number(x, digits = 2), 
+              label = list(..overall_1.. = "OS", ..overall_2.. = "PFS")) %>%
+  add_n() %>% 
+  add_nevent() %>% 
+  bold_labels() %>% 
+  modify_header(list(label = "", nevent = "**N events**")) %>% 
+  gtsummary::as_kable_extra(booktabs = T, caption = "Survival Analysis", linesep = "", longtable = T)
+```
+
+```{r KM-OS, echo=FALSE, fig.cap= "KM of OS", fig.align='center', out.width= "100%", fig.pos="H"}
+knitr::include_graphics(path = path_to_KM_OS)
+```
+
+```{r KM-PFS, echo=FALSE, fig.cap= "KM of PFS", fig.align='center', out.width= "100%", fig.pos="H"}
+knitr::include_graphics(path = path_to_KM_PFS)
+```
+
+## Univariate analysis 
+
+Univariate Cox proportional hazard models were fitted on variables to understand the impact on the overall survival as well as progression-free survival.  
+For each clinical variable, the hazard ratio (HR), its 95% confidence interval (CI), and the p-value from the Wald test are reported. 
+
+```{r clin, results='asis', echo=FALSE, warning=FALSE}
+list("tbl_regression-str:ref_row_text" = "Ref") %>% 
+  set_gtsummary_theme()
+
+tbl_OS <- tbl_uvregression(data = data_surv, 
+                           include = vett_clinics, 
+                           y = Surv(OS, OS_EVENT), 
+                           method = coxph, 
+                           exponentiate = T, 
+                           hide_n = T, 
+                           label = clinics_label, 
+                           pvalue_fun = function(x) formatz_p(x), 
+                           add_estimate_to_reference_rows = TRUE) %>% 
+  modify_header(label = "**Variable**") %>% 
+  add_n(location = "level") %>% 
+  add_nevent(location = "level") %>% 
+  # Adding global test on multiple categories variables
+  add_global_p(include = c(), keep = T) %>% 
+  bold_labels() %>% 
+  italicize_levels() %>% 
+  # Adding significance stars
+  add_significance_stars(
+    hide_p = FALSE, hide_ci = FALSE, hide_se = TRUE,
+    pattern = "{p.value} {stars}",
+    thresholds = 0.05
+  )
+
+# To modify data in the table
+tbl_OS$table_body[, "estimate"] <- 
+tbl_OS$table_body[, "conf.low"] <- 
+tbl_OS$table_body[, "conf.high"] <- 
+
+# Adding Ref to CI of reference category
+tbl_OS$table_body$ci[tbl_OS$table_body$reference_row == TRUE] <- "Ref"
+
+# UNIVARIATE ANALYSIS ON PFS ----
+tbl_PFS <- tbl_uvregression(data = data_surv, 
+                            include = vett_clinics, 
+                            y = Surv(PFS, PFS_EVENT), 
+                            method = coxph, 
+                            exponentiate = T, 
+                            hide_n = T, 
+                            label = clinics_label,
+                            pvalue_fun = function(x) formatz_p(x), 
+                            add_estimate_to_reference_rows = TRUE) %>% 
+  modify_header(label = "**Variable**") %>% 
+  add_n(location = "level") %>% 
+  add_nevent(location = "level") %>% 
+  # Adding global test on multiple categories variables
+  add_global_p(include = c(), keep = T) %>% 
+  bold_labels() %>% 
+  italicize_levels() %>% 
+  # Adding significance stars
+  add_significance_stars(
+    hide_p = FALSE, hide_ci = FALSE, hide_se = TRUE,
+    pattern = "{p.value} {stars}",
+    thresholds = 0.05
+  )
+
+# To modify data in the table
+tbl_PFS$table_body[, "estimate"] <- 
+tbl_PFS$table_body[, "conf.low"] <- 
+tbl_PFS$table_body[, "conf.high"] <- 
+
+# Adding Ref to CI of reference category
+tbl_PFS$table_body$ci[tbl_PFS$table_body$reference_row == TRUE] <- "Ref"
+
+# To merge the two tables horizontally
+tbl_merge(tbls = list(tbl_OS, tbl_PFS), tab_spanner = c("**OS**", "**PFS**")) %>% 
+  gtsummary::as_kable_extra(booktabs = T, caption = "Univariate models by clinical variables", 
+                            linesep = "", longtable = T) %>% 
+  kable_styling(font_size = 9, latex_options = "repeat_header")
+```
+
+
+## Multivariate models
+
+Multivariate models were developed by applying the stepwise regression to identify the most significant clinical variables associated with patient survival. During the stepwise selection, variables are iteratively added or removed based on their statistical significance, as measured by the likelihood ratio test, with a p-value threshold of 0.05 to get into the model and a threshold of 0.1 to get sent off. The goal was to retain only those variables that contributed meaningfully to model accuracy, avoiding multicollinearity and overfitting.  
+The identified clinical variables are then implemented to fit a multivariate Cox proportional hazards model. Models were adjusted for age and gender, recognizing the potential confounding effects on patient survival. 
+
+```{r Multi, results='asis', echo=FALSE, warning=FALSE}
+
+cox <- coxph(Surv(Time_to_Event, Event) ~ your_variables, data = data_surv) %>% 
+  tbl_regression(exp = TRUE, 
+                 pvalue_fun = function(x) formatz_p(x), 
+                 label = clinics_label, 
+                 add_estimate_to_reference_rows = TRUE)  %>%
+  modify_header(label = "**Variable**", n_event = "**N events**") %>% 
+  add_n(location = "level") %>%
+  # Adding global test on multiple categories variables
+  add_global_p(include = c(), keep = T) %>% 
+  bold_labels() %>% 
+  italicize_levels()
+
+# To modify data in the table
+cox$table_body[, "estimate"] <- 
+cox$table_body[, "conf.low"] <- 
+cox$table_body[, "conf.high"] <- 
+
+cox %>% gtsummary::as_kable_extra(booktabs = T, caption = "Multivariate Cox model on OS", 
+                            linesep = "", longtable = T)
+```

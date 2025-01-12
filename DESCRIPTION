@@ -1,0 +1,26 @@
+Package: TemplateLandS
+Title: LaTeX template for report
+Version: 1.0.1
+Authors@R:
+    person(given = "Stefano",
+           family = "Bergamini",
+           role = c("aut", "cre"),
+           email = "stefano.bergamini@istitutotumori.mi.it",
+           comment = c(ORCID = "0009-0008-8874-8537"))
+Description: Provides an R Markdown template conforming to the
+    Fondazione IRCCS Istituto Nazionale dei Tumori guidance
+License: MIT + file LICENSE
+Depends:
+    R (>= 4.0.0)
+Imports:
+    glue,
+    knitr (>= 1.12),
+    rmarkdown,
+    utils,
+    withr,
+    yaml
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+URL: https://stheberga.github.io/TemplateLandS/
