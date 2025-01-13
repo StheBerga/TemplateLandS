@@ -5,17 +5,36 @@
 \title{Corporate Design: Title Page}
 \usage{
 cd_page_title(
-  title = default(rmarkdown::metadata$title, "Title"),
-  subtitle = default(rmarkdown::metadata$subtitle, "Subtitle"),
-  date = default(rmarkdown::metadata$date, cd_format_date(Sys.Date()))
+  studytitle = default(rmarkdown::metadata$studytitle, "Study title"),
+  reporttitle = default(rmarkdown::metadata$reporttitle, "Report title"),
+  date = default(rmarkdown::metadata$date, format(Sys.Date(), ("\%d-\%m-\%Y"))),
+  department = default(rmarkdown::metadata$department, "Your Department"),
+  unit = default(rmarkdown::metadata$unit, "Your research Unit"),
+  authorone = default(rmarkdown::metadata$authorone, "First author"),
+  roleone = default(rmarkdown::metadata$roleone, "First author role"),
+  emailone = default(rmarkdown::metadata$emailone, "name.surname@email.com"),
+  authortwo = default(rmarkdown::metadata$authortwo, "Second author"),
+  roletwo = default(rmarkdown::metadata$roletwo, "Second author role"),
+  emailtwo = default(rmarkdown::metadata$emailtwo, "name.surname@email.com"),
+  authorthree = default(rmarkdown::metadata$authorthree, "Third author"),
+  rolethree = default(rmarkdown::metadata$rolethree, "Third author role"),
+  emailthree = default(rmarkdown::metadata$emailthree, "name.surname@email.com"),
+  authorfour = default(rmarkdown::metadata$authorfour, "Fourth author"),
+  rolefour = default(rmarkdown::metadata$rolefour, "Fourth author role"),
+  emailfour = default(rmarkdown::metadata$emailfour, "name.surname@email.com"),
+  tableofcontents = default(rmarkdown::metadata$tableofcontents, "true"),
+  tocname = default(rmarkdown::metadata$tocname, "Table of Contents"),
+  tocdepth = default(rmarkdown::metadata$tocdepth, "2"),
+  linestretchtable = default(rmarkdown::metadata$linestretchtable, "0.8"),
+  linestretch = default(rmarkdown::metadata$linestretch, "1.5")
 )
 }
 \arguments{
+\item{date}{Document creation date}
+
 \item{title}{Document title}
 
 \item{subtitle}{Document subtitle}
-
-\item{date}{Document creation date}
 }
 \value{
 Object of class \code{"knit_asis"} (so that knitr will treat it as is). LaTeX code for title page.
