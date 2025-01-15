@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 # TemplateLandS: Template for Statistical Report Generation
 A ready-to-use template package for creating statistical reports.
 
-<!-- [![R-CMD-check](https://github.com/StheBerga/TemplateLandS/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/StheBerga/TemplateLandS/actions) -->
+# TemplateLandS <a href="https://stheberga.github.io/TemplateLandS/"><img src="man/figures/logo.png" align="right" height="138" alt="TemplateLandS website" /></a>
 ![R](https://img.shields.io/badge/r-%23276DC3.svg?style=for-the-badge&logo=r&logoColor=white)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 

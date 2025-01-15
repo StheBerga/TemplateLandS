@@ -7,6 +7,9 @@
 knit_LB(input, ...)
 }
 \arguments{
+\item{input}{The input file to be rendered. This can be an R script (.R),
+an R Markdown document (.Rmd), or a plain markdown document.}
+
 \item{...}{Additional arguments passed to the rmarkdown::render function.}
 }
 \value{
@@ -22,9 +25,6 @@ Render the input file to a specific output folder. If the Output folder does not
 }
 \details{
 You can also setup the \code{knit} function in the YAML header of the R Markdown file. See the example below.
-
-@param input The input file to be rendered. This can be an R script (.R),
-an R Markdown document (.Rmd), or a plain markdown document.
 }
 \examples{
 \dontrun{
@@ -34,8 +34,5 @@ library(rmarkdown)
 render("input.Rmd")
 }
 
----
-knit: TemplateLandS::knit_LB
----
 
 }

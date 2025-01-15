@@ -5,7 +5,7 @@
 #' You can also setup the `knit` function in the YAML header of the R Markdown file. See the example below.
 #'
 #'
-#'  @param input The input file to be rendered. This can be an R script (.R),
+#' @param input The input file to be rendered. This can be an R script (.R),
 #' an R Markdown document (.Rmd), or a plain markdown document.
 #' @param ... Additional arguments passed to the rmarkdown::render function.
 #'
@@ -26,9 +26,7 @@
 #' render("input.Rmd")
 #' }
 #' 
-#' ---
-#' knit: TemplateLandS::knit_LB
-#' ---
+
 #' 
 knit_LB <- function(input, ...) {
   rmarkdown::render(
