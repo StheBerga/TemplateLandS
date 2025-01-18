@@ -1,6 +1,6 @@
 Package: TemplateLandS
-Title: LaTeX template for report
-Version: 1.0.1
+Title: LaTeX template for statistical report
+Version: 1.0.2
 Authors@R: c(
     person(given = "Stefano",
            family = "Bergamini",
@@ -12,8 +12,8 @@ Authors@R: c(
            role = "aut",
            email = "luca.lalli@istitutotumori.mi.it",
            comment = c(ORCID = "0000-0002-4472-628X")))
-Description: Provides an R Markdown template conforming to the
-    Fondazione IRCCS Istituto Nazionale dei Tumori guidance
+Description: Provides an R markdown template for the production of statistical reports for the
+    Fondazione IRCCS Istituto Nazionale dei Tumori
 License: MIT + file LICENSE
 Depends:
     R (>= 4.0.0)
@@ -29,3 +29,4 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 URL: https://stheberga.github.io/TemplateLandS/
+VignetteBuilder: knitr

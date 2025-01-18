@@ -1,22 +1,19 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# TemplateLandS: Template for Statistical Report Generation
+# INT Template
 
-A ready-to-use template package for creating statistical reports.
+A ready-to-use template for statistical report creation.
 
-# TemplateLandS <a href="https://stheberga.github.io/TemplateLandS/"><img src="man/figures/logo.png" align="right" height="138" alt="TemplateLandS website" /></a>
-
-![R](https://img.shields.io/badge/r-%23276DC3.svg?style=for-the-badge&logo=r&logoColor=white)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 ## Description
 
-TemplateLandS is designed to streamline the creation of statistical
-reports. This package provides a ready-to-use template for generating
-customizable, easy-to-read reports. It is particularly suited for
-statistical analysis, including survival analysis for patient datasets,
-as well as univariate and multivariate statistical analyses.
+INT Template is a R Markdown template designed for creating statistical
+reports for the [Fondazione IRCCS Istituto Nazionale dei
+Tumori](https://www.istitutotumori.mi.it). The package was developed
+using the [indiedown](https://doi.org/10.32614/CRAN.package.indiedown)
+package, and the output format is PDF using the *xelatex* engine.
 
 ## Installation
 
@@ -34,22 +31,12 @@ devtools::install_github("StheBerga/TemplateLandS")
 ## Quick Start
 
 After installing the package, you will need to restart R to access the
-template. To create a new R Markdown file utilizing TemplateLandS,
-navigate to File -\> New File -\> R Markdown. In the resulting window,
-choose “From Template,” and then select “LandS LaTeX Report
-{TemplateLandS}” from the options on the right.
+template. To create a new R Markdown file using TemplateLandS, navigate
+to File -\> New File -\> R Markdown. In the resulting window, choose
+“From Template,” and then select “LandS LaTeX Report {TemplateLandS}”
+from the options on the right.
 
-## Key Features
-
-- Ready-to-use template for statistical report generation
-- Includes predefined chunks for survival analysis of patient datasets
-- Supports univariate and multivariate statistical analyses
-- Customizable layout and content options for your reports
-- Export reports in various formats (HTML, PDF, Word)
-
-## Documentation
-
-<!-- For detailed documentation and tutorials, visit the [Wiki](https://github.com/StheBerga/TemplateLandS/wiki). -->
+For more information, please consult the vignette section.
 
 ## Contributing
 

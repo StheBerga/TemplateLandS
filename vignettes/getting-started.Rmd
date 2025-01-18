@@ -1,0 +1,79 @@
+---
+title: "Getting started with INT Template"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting started with INT Template}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+To create a new R Markdown document using the INTemplate template, navigate to File -\> New File -\> R Markdown in the toolbar section. Select From Template, click on INT LaTeX Report {INTemplate} and press OK. Congratulations! You created the skeleton of your report. We will now focus on the header section of our Rmd document, the YAML section.
+
+## YAML Section
+
+The YAML section contains all the information needed to compile the cover of your report - see the figure for references.
+
+```{r, out.width='100%', fig.align='center', fig.cap='YAML header and default settings cover', echo=FALSE}
+knitr::include_graphics(path = "./images/YAML.png")
+```
+
+In the order:
+
+-   `studytitle` refers to the name of the study in question. It appears in the top section of the frontispiece
+
+-   `reporttitle` refers to the name of the report. It appears in the central part of the frontispiece
+
+-   `department` and `unit` refers, respevtevly, to the authors' research Department and Unit. They appear in the lower section of the cover
+
+-   `authorone`, `authortwo`, `authorthree`, and `authorfour` are the authors' names of the report or study and will appear under the reporttitle section. If the authors are inferior, you can omit them by replacing the author with ""
+
+-   `mailone`, `mailtwo`, `mailthree`, and `mailfour` are the authors' email addresses and appear as hyperlinks in the footer section of the cover
+
+-   `roleone`, `roletwo`, `rolethree`, and `rolefour` are the authors' roles and are inserted in the footer section of the cover
+
+-   `documentclass: article`, refers to the .tex document class. Please do not modify
+
+-   `fontsize: 12pt (default)`, absolute font size (Times New Roman) to compile the report
+
+-   `numbersections: true (default)`, specifies whether or not to insert numbering into report sections
+
+-   `tableofcontents: true (default)`, specifies whether or not to insert the *Table of Contents* after the cover page
+
+-   `tocname:` specifies the name of the *Table of Contents*
+
+-   `tocdepth: 2 (default)`, specifies the depth of the *Table of Contents*:
+
+    -   1 only the chapters (preceded by \#) will appear in the Table of Contents
+
+    -   2 the chapters and sub-chapters (preceded by \# and \##)
+
+    -   3 chapters, sub-chapters and sub-sub-chapters (#, \## and \###)
+
+-   `linestretchtable: 0.8 (default)` specifies the line spacing within tables
+
+-   `linestretch: 1.5 (default)` specifies the line spacing in the entire document
+
+-   `output: TemplateLandS::TemplateLandS`, specify the path to build the report. Please do not modify
+
+-   `knit: TemplateLandS::knit_LB` specifies the function to perform the knit. Please refer to the *"The knitINT function"* section down below for more.
+
+## The knitINT function
+
+When you click the `Knit` button in RStudio, it will call the `rmarkdown::render()` function in a new R session and output a file of the same base name as the input file in the same directory. For example, knitting `example.Rmd` with the output format `pdf_document` will create an output file `example.pdf.`
+
+There may be situations where you want to customize how the document is rendered. For example, taking the case of a folder related to a project, you can have the `Analysis` folder, where analysis scripts are stored (including also the file `Report.Rmd`), the `Data` folder, where datasets are stored, and the `Output` folder where we store charts and tables, and where we would like to keep our report file, possibly with the render date attached to.
+
+By default, the `rmarkdown::render()` function renders the `Report.pdf` file in the same directory as the `Report.Rmd` file. Therefore, if the `Report.Rmd` is in the `project/Analysis` folder, the file `Report.pdf` will be in the project/Analysis folder as well. The `knitINT` function offers a solution to this problem. In particular:
+
+-   The `Output_directory = TRUE (Default)` option allows you to render - if it exists - the `Report.pdf` file in the `project/Output` folder. If the directory does not exist, the rendered file will be in the same folder as the `Report.Rmd` file
+
+-   The `date = TRUE (Default)` option allows you to paste the current date to the report filename
+
+You can change the options of the `knitINT` function from the YAML section of the `Report.Rmd` file. Setting both options to `FALSE` will get you the default options of the `rmarkdown::render()` function, or you can omit the `knit: INTemplate::knitINT` line in the YAML section.
