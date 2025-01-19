@@ -5,7 +5,12 @@
 
 A ready-to-use template for statistical report creation.
 
+<img src="man/figures/logo.png" align="right" width="120"/>
+
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![R-CMD-check](https://github.com/StheBerga/TemplateLandS/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/StheBerga/TemplateLandS/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/StheBerga/TemplateLandS/graph/badge.svg)](https://app.codecov.io/gh/StheBerga/TemplateLandS)
 
 ## Description
 
