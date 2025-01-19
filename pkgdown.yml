@@ -3,7 +3,7 @@ pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   getting-started: getting-started.html
-last_built: 2025-01-19T00:21Z
+last_built: 2025-01-19T12:41Z
 urls:
   reference: https://stheberga.github.io/TemplateLandS/reference
   article: https://stheberga.github.io/TemplateLandS/articles
